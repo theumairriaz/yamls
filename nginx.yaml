@@ -1,0 +1,18 @@
+---
+  # your added host name in /etc/ansible/hosts
+  - hosts: webserver
+    become: yes
+    tasks:
+      # sudo apt-get update
+      - name: update apt
+        apt: update_cache=yes
+      # sudo apt install nginx@latest
+      - name: Install Nginx
+        apt: name=nginx state=latest
+
+        notify:
+          - restart nginx
+
+    handlers:
+      - name: restart nginx
+        service: name=nginx state=reloaded
