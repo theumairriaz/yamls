@@ -1,0 +1,9 @@
+---
+- hosts: webserver
+  become: yes
+  tasks:
+    - name: update apt
+    - update: update_cache=yes
+
+    - name: Install nettools
+      apt: name=net-tools state=latest
